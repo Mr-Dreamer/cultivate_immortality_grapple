@@ -1,5 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+// ---------------------------------------------------------------
+// 文件名称：UGUIGroupHelper.cs
+// 创 建 者：赵志伟
+// 创建时间：2022/11/30
+// 功能描述：UGUI界面组辅助器
+// ---------------------------------------------------------------
 using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;

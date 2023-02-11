@@ -1,7 +1,12 @@
 using GameFramework.Procedure;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+// ---------------------------------------------------------------
+// 文件名称：ProcedureLaunch.cs
+// 创 建 者：赵志伟
+// 创建时间：2023/02/10
+// 功能描述：入口流程(运行游戏后的第一个流程)
+// ---------------------------------------------------------------
 using UnityGameFramework.Runtime;
 using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedureManager>;
 
@@ -9,6 +14,8 @@ namespace Grapple
 {
     public class ProcedureLaunch : ProcedureBase
     {
+        public override bool UseNativeDialog => throw new System.NotImplementedException();
+
         // 游戏初始化时执行
         protected override void OnInit(ProcedureOwner procedureOwner)
         {

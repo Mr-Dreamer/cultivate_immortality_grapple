@@ -1,14 +1,17 @@
-using GameFramework.Procedure;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityGameFramework.Runtime;
+// ---------------------------------------------------------------
+// 文件名称：ProcedureMain.cs
+// 创 建 者：赵志伟
+// 创建时间：2023/02/10
+// 功能描述：
+// ---------------------------------------------------------------
 using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedureManager>;
 
 namespace Grapple
 {
     public class ProcedureMain : ProcedureBase
     {
+        public override bool UseNativeDialog => throw new System.NotImplementedException();
+
         // 游戏初始化时执行。
         protected override void OnInit(ProcedureOwner procedureOwner)
         {
