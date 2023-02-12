@@ -2055,7 +2055,7 @@ GameObject:
   - component: {fileID: 8296188613702712220}
   - component: {fileID: 2720692329586237926}
   m_Layer: 0
-  m_Name: Unity_Grruzam_BaseModeling_no_weapon
+  m_Name: GreatSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2312,7 +2312,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1982315913299486, guid: 958cf4748c84fb948bc3400edc8005e9, type: 3}
       propertyPath: m_Name
-      value: Modeling_Weapon_Big_Sword
+      value: bigsword
       objectReference: {fileID: 0}
     - target: {fileID: 4574269520425118, guid: 958cf4748c84fb948bc3400edc8005e9, type: 3}
       propertyPath: m_RootOrder

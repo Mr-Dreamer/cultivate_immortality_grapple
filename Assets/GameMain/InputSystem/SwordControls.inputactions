@@ -1,0 +1,67 @@
+{
+    "name": "SwordControls",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "f7549d1b-e8a2-4698-8edb-7fc227a38e36",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Button",
+                    "id": "1c000f3c-a2c6-4d94-b4ef-8f62d3474871",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "39ae3e10-9f38-43b1-9579-0b82a9ffdcb0",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "7bb4804b-1113-416e-9db8-48913480065c",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "8f1d9d69-3c8a-4e9c-b6ff-acd8882252cc",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "fbb0b6b9-3df9-46bb-b872-a89b3ad167aa",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
