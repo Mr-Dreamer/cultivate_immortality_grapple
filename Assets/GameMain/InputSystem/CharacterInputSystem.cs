@@ -17,4 +17,9 @@ public class CharacterInputSystem : MonoBehaviour
     {
         get => m_InputController.PlayerInput.Movement.ReadValue<Vector2>();
     }
+
+    public bool PlayerRun
+    {
+        get => m_InputController.PlayerInput.Run.phase == InputActionPhase.Performed;
+    }
 }
