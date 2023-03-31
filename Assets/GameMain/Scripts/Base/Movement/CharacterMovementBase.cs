@@ -59,6 +59,9 @@ namespace Grapple.Move
 
         }
 
+        /// <summary>
+        /// 角色重力
+        /// </summary>
         private void CharacterGravity()
         {
             if (m_IsOnGround)
@@ -77,6 +80,54 @@ namespace Grapple.Move
                     m_CharacterFallOutDeltaTime = Mathf.Clamp(m_CharacterFallOutDeltaTime, 0, m_CharacterFallTime);
                 }
             }
+
+            if (m_VerticalSpeed < m_MaxVerticalSpeed)
+            {
+                m_VerticalSpeed += m_CharacterGravity * Time.deltaTime;
+            }
+        }
+
+        /// <summary>
+        /// 地面检测
+        /// </summary>
+        private void CheckOnGround()
+        {
+            Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - m_GroundDetectionOffset, transform.position.z);
+            m_IsOnGround = Physics.CheckSphere(spherePosition, m_GroundDetectionRang, m_WhatIsGround, QueryTriggerInteraction.Ignore);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+
+            if (m_IsOnGround)
+                Gizmos.color = Color.green;
+            else
+                Gizmos.color = Color.red;
+
+            Vector3 position = Vector3.zero;
+
+            position.Set(transform.position.x, transform.position.y - m_GroundDetectionOffset,
+                transform.position.z);
+
+            Gizmos.DrawWireSphere(position, m_GroundDetectionRang);
+        }
+
+        /// <summary>
+        /// 坡度检测
+        /// </summary>
+        /// <param name="dir">当前移动方向</param>
+        /// <returns></returns>
+        protected Vector3 ResetMoveDirectionOnSlop(Vector3 dir)
+        {
+            if (Physics.Raycast(transform.position, -Vector3.up, out var hit, m_SlopRayExtent))
+            {
+                float newAnle = Vector3.Dot(Vector3.up, hit.normal);
+                if (newAnle != 0 && m_VerticalSpeed <= 0)
+                {
+                    return Vector3.ProjectOnPlane(dir, hit.normal);
+                }
+            }
+            return dir;
         }
     }
 }
