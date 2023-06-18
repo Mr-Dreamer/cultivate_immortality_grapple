@@ -18,8 +18,36 @@ public class CharacterInputSystem : MonoBehaviour
         get => m_InputController.PlayerInput.Movement.ReadValue<Vector2>();
     }
 
+    public Vector2 CameraLook
+    {
+        get => m_InputController.PlayerInput.CameraLook.ReadValue<Vector2>();
+    }
+
     public bool PlayerRun
     {
         get => m_InputController.PlayerInput.Run.phase == InputActionPhase.Performed;
+    }
+    public bool PlayerLAtk
+    {
+        get => m_InputController.PlayerInput.LAtk.triggered;
+    }
+
+    public bool PlayerRAtk
+    {
+        get => m_InputController.PlayerInput.RAtk.triggered;
+    }
+    public bool PlayerDefen
+    {
+        get => m_InputController.PlayerInput.Defen.phase == InputActionPhase.Performed;
+    }
+
+    public bool PlayerRoll
+    {
+        get => m_InputController.PlayerInput.Roll.triggered;
+    }
+
+    public bool PlayerCrouch
+    {
+        get => m_InputController.PlayerInput.Crouch.triggered;
     }
 }

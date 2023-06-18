@@ -1,23 +1,23 @@
 using System.IO;
 
 /// <summary>
-/// ´´½¨½Å±¾Ê±×Ô¶¯Ìí¼ÓÍ·²¿×¢ÊÍ
+/// åˆ›å»ºè„šæœ¬æ—¶è‡ªåŠ¨æ·»åŠ å¤´éƒ¨æ³¨é‡Š
 /// </summary>
 public class AddFileHeadComment : UnityEditor.AssetModificationProcessor
 {
     /// <summary>
-    /// ´Ëº¯ÊıÔÚasset±»´´½¨Íê£¬ÎÄ¼şÒÑ¾­Éú³Éµ½´ÅÅÌÉÏ£¬µ«ÊÇÃ»ÓĞÉú³É.metaÎÄ¼şºÍimportÖ®Ç°±»µ÷ÓÃ
+    /// æ­¤å‡½æ•°åœ¨assetè¢«åˆ›å»ºå®Œï¼Œæ–‡ä»¶å·²ç»ç”Ÿæˆåˆ°ç£ç›˜ä¸Šï¼Œä½†æ˜¯æ²¡æœ‰ç”Ÿæˆ.metaæ–‡ä»¶å’Œimportä¹‹å‰è¢«è°ƒç”¨
     /// </summary>
-    /// <param name="path">ÊÇÓÉ´´½¨ÎÄ¼şµÄpath¼ÓÉÏ.meta×é³ÉµÄ</param>
+    /// <param name="path">æ˜¯ç”±åˆ›å»ºæ–‡ä»¶çš„pathåŠ ä¸Š.metaç»„æˆçš„</param>
     public static void OnWillCreateAsset(string path)
     {
         path = path.Replace(".meta", "");
         if (!path.EndsWith(".cs")) return;
         string allText = "// ---------------------------------------------------------------\r\n"
-                         + "// ÎÄ¼şÃû³Æ£º#SCRIPTFULLNAME#\r\n"
-                         + "// ´´ ½¨ Õß£º\r\n"
-                         + "// ´´½¨Ê±¼ä£º#CreateTime#\r\n"
-                         + "// ¹¦ÄÜÃèÊö£º\r\n"
+                         + "// æ–‡ä»¶åç§°ï¼š#SCRIPTFULLNAME#\r\n"
+                         + "// åˆ› å»º è€…ï¼š\r\n"
+                         + "// åˆ›å»ºæ—¶é—´ï¼š#CreateTime#\r\n"
+                         + "// åŠŸèƒ½æè¿°ï¼š\r\n"
                          + "// ---------------------------------------------------------------\r\n";
         allText += File.ReadAllText(path);
         allText = allText.Replace("#SCRIPTFULLNAME#", Path.GetFileName(path));

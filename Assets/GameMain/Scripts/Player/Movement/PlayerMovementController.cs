@@ -14,227 +14,229 @@ namespace Grapple.Move
 {
     public class PlayerMovementController : CharacterMovementBase
     {
-        ////引用
-        //private Transform characterCamera;
-        //private TP_CameraController _tpCameraController;
+        //引用
+        private Transform m_CharacterCamera;
+        private TP_CameraController m_TpCameraController;
 
-        //[SerializeField, Header("相机锁定点")] private Transform standCameraLook;
-        //[SerializeField] private Transform crouchCameraLook;
+        [SerializeField, Header("相机锁定点")] private Transform m_StandCameraLook;
+        [SerializeField] private Transform m_CrouchCameraLook;
 
-        ////Ref Value
-        //private float targetRotation;
-        //private float rotationVelocity;
+        //Ref Value
+        private float m_TargetRotation;
+        private float m_RotationVelocity;//玩家当前角度（没多大作用，方法参数要求）
 
-        ////LerpTime
-        //[SerializeField, Header("旋转速度")] private float rotationLerpTime;
-        //[SerializeField] private float moveDirctionSlerpTime;
+        //LerpTime
+        [SerializeField, Header("旋转速度")] private float m_RotationLerpTime;
+        [SerializeField] private float m_MoveDirctionSlerpTime;
 
 
-        ////Move Speed
-        //[SerializeField, Header("移动速度")] private float walkSpeed;
-        //[SerializeField, Header("移动速度")] private float runSpeed;
-        //[SerializeField, Header("移动速度")] private float crouchMoveSpeed;
+        //Move Speed
+        [SerializeField, Header("移动速度")] private float m_WalkSpeed;
+        [SerializeField, Header("移动速度")] private float m_RunSpeed;
+        [SerializeField, Header("移动速度")] private float m_CrouchMoveSpeed;
 
 
-        //[SerializeField, Header("角色胶囊控制(下蹲)")] private Vector3 crouchCenter;
-        //[SerializeField] private Vector3 originCenter;
-        //[SerializeField] private Vector3 cameraLookPositionOnCrouch;
-        //[SerializeField] private Vector3 cameraLookPositionOrigin;
-        //[SerializeField] private float crouchHeight;
-        //[SerializeField] private float originHeight;
-        //[SerializeField] private bool isOnCrouch;
-        //[SerializeField] private Transform crouchDetectionPosition;
-        //[SerializeField] private Transform CameraLook;
-        //[SerializeField] private LayerMask crouchDetectionLayer;
+        [SerializeField, Header("角色胶囊控制(下蹲)")] private Vector3 m_CrouchCenter;
+        [SerializeField] private Vector3 m_OriginCenter;
+        [SerializeField] private Vector3 m_CameraLookPositionOnCrouch;
+        [SerializeField] private Vector3 m_CameraLookPositionOrigin;
+        [SerializeField] private float m_CrouchHeight;
+        [SerializeField] private float m_OriginHeight;
+        [SerializeField] private bool m_IsOnCrouch;
+        [SerializeField] private Transform m_CrouchDetectionPosition;
+        [SerializeField] private Transform m_CameraLook;
+        [SerializeField] private LayerMask m_CrouchDetectionLayer;
 
-        ////animationID
-        //private int crouchID = Animator.StringToHash("Crouch");
+        //animationID
+        private int crouchID = Animator.StringToHash("Crouch");
 
 
-        //#region 内部函数
+        #region 内部函数
 
-        //protected override void Awake()
-        //{
-        //    base.Awake();
+        protected override void Awake()
+        {
+            base.Awake();
 
-        //    characterCamera = Camera.main.transform.root.transform;
-        //    _tpCameraController = characterCamera.GetComponent<TP_CameraController>();
-        //}
+            m_CharacterCamera = Camera.main.transform.root.transform;
+            m_TpCameraController = m_CharacterCamera.GetComponent<TP_CameraController>();
+        }
 
-        //protected override void Start()
-        //{
-        //    base.Start();
+        protected override void Start()
+        {
+            base.Start();
 
 
-        //    cameraLookPositionOrigin = CameraLook.position;
-        //}
+            m_CameraLookPositionOrigin = m_CameraLook.position;
+        }
 
-        //protected override void Update()
-        //{
-        //    base.Update();
+        protected override void Update()
+        {
+            base.Update();
 
-        //    PlayerMoveDirection();
+            PlayerMoveDirection();
 
-        //}
+        }
 
-        //private void LateUpdate()
-        //{
-        //    CharacterCrouchControl();
-        //    UpdateMotionAnimation();
-        //    UpdateCrouchAnimation();
-        //    UpdateRollAnimation();
+        private void LateUpdate()
+        {
+            CharacterCrouchControl();
+            UpdateMotionAnimation();
+            UpdateCrouchAnimation();
+            UpdateRollAnimation();
 
-        //}
+        }
 
-        //#endregion
+        #endregion
 
 
 
-        //#region 条件
+        #region 条件
 
-        //private bool CanMoveContro()
-        //{
-        //    return m_IsOnGround && m_CharacterAnimator.CheckAnimationTag("Motion") || characterAnimator.CheckAnimationTag("CrouchMotion");
-        //}
+        private bool CanMoveContro()
+        {
+            return m_IsOnGround && m_CharacterAnimator.CheckAnimationTag("Motion") || m_CharacterAnimator.CheckAnimationTag("CrouchMotion");
+        }
 
-        //private bool CanCrouch()
-        //{
-        //    if (characterAnimator.CheckAnimationTag("Crouch")) return false;
-        //    if (characterAnimator.GetFloat(runID) > .9f) return false;
+        private bool CanCrouch()
+        {
+            if (m_CharacterAnimator.CheckAnimationTag("Crouch")) return false;
+            if (m_CharacterAnimator.GetFloat(m_RunID) > .9f) return false;
 
-        //    return true;
-        //}
+            return true;
+        }
 
 
-        //private bool CanRunControl()
-        //{
-        //    if (Vector3.Dot(movementDirection.normalized, transform.forward) < 0.75f) return false;
-        //    if (!CanMoveContro()) return false;
+        private bool CanRunControl()
+        {
+            if (Vector3.Dot(m_MovementDirection.normalized, transform.forward) < 0.75f) return false;
+            if (!CanMoveContro()) return false;
 
 
-        //    return true;
-        //}
+            return true;
+        }
 
-        //#endregion
+        #endregion
 
 
-        //private void PlayerMoveDirection()
-        //{
+        private void PlayerMoveDirection()
+        {
 
-        //    if (isOnGround && _inputSystem.playerMovement == Vector2.zero)
-        //        movementDirection = Vector3.zero;
+            if (m_IsOnGround && m_CharacterInputSystem.PlaerMovement == Vector2.zero)
+                m_MovementDirection = Vector3.zero;
 
-        //    if (CanMoveContro())
-        //    {
-        //        if (_inputSystem.playerMovement != Vector2.zero)
-        //        {
-        //            targetRotation = Mathf.Atan2(_inputSystem.playerMovement.x, _inputSystem.playerMovement.y) * Mathf.Rad2Deg + characterCamera.localEulerAngles.y;
+            if (CanMoveContro())
+            {
+                if (m_CharacterInputSystem.PlaerMovement != Vector2.zero)
+                {
+                    //相机的目前的角度+移动的角度=目标角度，也就是玩家将要朝向的角度
+                    m_TargetRotation = Mathf.Atan2(m_CharacterInputSystem.PlaerMovement.x, m_CharacterInputSystem.PlaerMovement.y) * Mathf.Rad2Deg + m_CharacterCamera.localEulerAngles.y;
 
-        //            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref rotationVelocity, rotationLerpTime);
+                    //平滑阻尼角度，在rotationLerpTime时间内将玩家朝向targetRotation
+                    transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, m_TargetRotation, ref m_RotationVelocity, m_RotationLerpTime);
 
-        //            var direction = Quaternion.Euler(0f, targetRotation, 0f) * Vector3.forward;
+                    var direction = Quaternion.Euler(0f, m_TargetRotation, 0f) * Vector3.forward;
 
-        //            direction = direction.normalized;
+                    direction = direction.normalized;
 
-        //            movementDirection = Vector3.Slerp(movementDirection, ResetMoveDirectionOnSlop(direction),
-        //                moveDirctionSlerpTime * Time.deltaTime);
+                    m_MovementDirection = Vector3.Slerp(m_MovementDirection, ResetMoveDirectionOnSlop(direction),
+                        m_MoveDirctionSlerpTime * Time.deltaTime);
 
-        //        }
-        //    }
-        //    else
-        //    {
-        //        movementDirection = Vector3.zero;
-        //    }
+                }
+            }
+            else
+            {
+                m_MovementDirection = Vector3.zero;
+            }
 
-        //    control.Move((characterCurrentMoveSpeed * Time.deltaTime)
-        //        * movementDirection.normalized + Time.deltaTime
-        //        * new Vector3(0.0f, verticalSpeed, 0.0f));
+            m_CharacterController.Move((m_CharacterCurrentMoveSpeed * Time.deltaTime)
+                * m_MovementDirection.normalized + Time.deltaTime
+                * new Vector3(0.0f, m_VerticalSpeed, 0.0f));
 
 
-        //}
+        }
 
 
-        //private void UpdateMotionAnimation()
-        //{
+        private void UpdateMotionAnimation()
+        {
 
-        //    if (CanRunControl())
-        //    {
-        //        characterAnimator.SetFloat(movementID, _inputSystem.playerMovement.sqrMagnitude * ((_inputSystem.playerRun && !isOnCrouch) ? 2f : 1f), 0.1f, Time.deltaTime);
+            if (CanRunControl())
+            {
+                m_CharacterAnimator.SetFloat(m_MovementID, m_CharacterInputSystem.PlaerMovement.sqrMagnitude * ((m_CharacterInputSystem.PlayerRun && !m_IsOnCrouch) ? 2f : 1f), 0.1f, Time.deltaTime);
 
-        //        characterCurrentMoveSpeed = (_inputSystem.playerRun && !isOnCrouch) ? runSpeed : walkSpeed;
-        //    }
-        //    else
-        //    {
-        //        characterAnimator.SetFloat(movementID, 0f, 0.05f, Time.deltaTime);
-        //        characterCurrentMoveSpeed = 0f;
-        //    }
+                m_CharacterCurrentMoveSpeed = (m_CharacterInputSystem.PlayerRun && !m_IsOnCrouch) ? m_RunSpeed : m_WalkSpeed;
+            }
+            else
+            {
+                m_CharacterAnimator.SetFloat(m_MovementID, 0f, 0.05f, Time.deltaTime);
+                m_CharacterCurrentMoveSpeed = 0f;
+            }
 
-        //    characterAnimator.SetFloat(runID, (_inputSystem.playerRun && !isOnCrouch) ? 1f : 0f);
-        //}
+            m_CharacterAnimator.SetFloat(m_RunID, (m_CharacterInputSystem.PlayerRun && !m_IsOnCrouch) ? 1f : 0f);
+        }
 
-        //private void UpdateCrouchAnimation()
-        //{
-        //    if (isOnCrouch)
-        //    {
-        //        characterCurrentMoveSpeed = crouchMoveSpeed;
-        //    }
+        private void UpdateCrouchAnimation()
+        {
+            if (m_IsOnCrouch)
+            {
+                m_CharacterCurrentMoveSpeed = m_CrouchMoveSpeed;
+            }
 
-        //}
+        }
 
-        //private void UpdateRollAnimation()
-        //{
+        private void UpdateRollAnimation()
+        {
 
-        //}
+        }
 
-        //private void CharacterCrouchControl()
-        //{
-        //    if (!CanCrouch()) return;
+        private void CharacterCrouchControl()
+        {
+            if (!CanCrouch()) return;
 
-        //    if (_inputSystem.playerCrouch)
-        //    {
+            if (m_CharacterInputSystem.PlayerCrouch)
+            {
 
-        //        if (isOnCrouch)
-        //        {
-        //            if (!DetectionHeadHasObject())
-        //            {
-        //                isOnCrouch = false;
-        //                characterAnimator.SetFloat(crouchID, 0f);
-        //                SetCrouchColliderHeight(originHeight, originCenter);
-        //                _tpCameraController.SetLookPlayerTarget(standCameraLook);
-        //            }
+                if (m_IsOnCrouch)
+                {
+                    if (!DetectionHeadHasObject())
+                    {
+                        m_IsOnCrouch = false;
+                        m_CharacterAnimator.SetFloat(crouchID, 0f);
+                        SetCrouchColliderHeight(m_OriginHeight, m_OriginCenter);
+                        m_TpCameraController.SetLookPlayerTarget(m_StandCameraLook);
+                    }
 
-        //        }
-        //        else
-        //        {
-        //            isOnCrouch = true;
-        //            characterAnimator.SetFloat(crouchID, 1f);
-        //            SetCrouchColliderHeight(crouchHeight, crouchCenter);
-        //            _tpCameraController.SetLookPlayerTarget(crouchCameraLook);
-        //        }
-        //    }
-        //}
+                }
+                else
+                {
+                    m_IsOnCrouch = true;
+                    m_CharacterAnimator.SetFloat(crouchID, 1f);
+                    SetCrouchColliderHeight(m_CrouchHeight, m_CrouchCenter);
+                    m_TpCameraController.SetLookPlayerTarget(m_CrouchCameraLook);
+                }
+            }
+        }
 
 
-        //private void SetCrouchColliderHeight(float height, Vector3 center)
-        //{
-        //    control.center = center;
-        //    control.height = height;
+        private void SetCrouchColliderHeight(float height, Vector3 center)
+        {
+            m_CharacterController.center = center;
+            m_CharacterController.height = height;
 
-        //}
+        }
 
 
-        //private bool DetectionHeadHasObject()
-        //{
-        //    Collider[] hasObjects = new Collider[1];
+        private bool DetectionHeadHasObject()
+        {
+            Collider[] hasObjects = new Collider[1];
 
-        //    int objectCount = Physics.OverlapSphereNonAlloc(crouchDetectionPosition.position, 0.5f, hasObjects, crouchDetectionLayer);
+            int objectCount = Physics.OverlapSphereNonAlloc(m_CrouchDetectionPosition.position, 0.5f, hasObjects, m_CrouchDetectionLayer);
 
-        //    if (objectCount > 0)
-        //    {
-        //        return true;
-        //    }
+            if (objectCount > 0)
+            {
+                return true;
+            }
 
-        //    return false;
-        //}
+            return false;
+        }
     }
 }

@@ -44,6 +44,60 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraLook"",
+                    ""type"": ""Value"",
+                    ""id"": ""987cff69-73c4-4f0c-9bad-5a467f83b643"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LAtk"",
+                    ""type"": ""Button"",
+                    ""id"": ""bb7e4642-7915-4ea2-9ecb-a3b2ce78b111"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RAtk"",
+                    ""type"": ""Button"",
+                    ""id"": ""f278498c-049a-48b1-bd1d-011a4dd44f0b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Defen"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8a15563-b082-4eca-a332-60a00b284342"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e727736-c342-4470-85ab-2347abed0880"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""0bf436de-2198-43b2-abad-ac82b4cbbac7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,6 +166,138 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93a6b8ca-0b14-47e6-937d-2899a23fe30c"",
+                    ""path"": ""<Pointer>/delta"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2"",
+                    ""groups"": """",
+                    ""action"": ""CameraLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b20ee50b-7e8b-4ce0-8d35-e3d16cc999bf"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=5,y=5)"",
+                    ""groups"": """",
+                    ""action"": ""CameraLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0242a2e7-c990-4d5f-9738-58f0b911802a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LAtk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04482ea7-f9e7-4676-993a-780ba810042d"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LAtk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89c325b8-99b5-4efb-9d7a-678e026dbc74"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RAtk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ecaf4ab-e2a5-4ab3-b589-0441144f7b75"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RAtk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a77fb80-d9ba-4109-b18c-329b88b60229"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Defen"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc9cd820-9e5d-4973-9d80-1c9d85e2167f"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Defen"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1324785d-84a8-4fc1-8485-e2384e8065c1"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59dfb817-6316-42b5-863f-6382a2fed81d"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e8ad671-b792-4ff0-ab14-b56208aba5a3"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f874dc66-9f3a-4f3a-8721-88181df2159e"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -122,6 +308,12 @@ public partial class @InputController : IInputActionCollection2, IDisposable
         m_PlayerInput = asset.FindActionMap("PlayerInput", throwIfNotFound: true);
         m_PlayerInput_Movement = m_PlayerInput.FindAction("Movement", throwIfNotFound: true);
         m_PlayerInput_Run = m_PlayerInput.FindAction("Run", throwIfNotFound: true);
+        m_PlayerInput_CameraLook = m_PlayerInput.FindAction("CameraLook", throwIfNotFound: true);
+        m_PlayerInput_LAtk = m_PlayerInput.FindAction("LAtk", throwIfNotFound: true);
+        m_PlayerInput_RAtk = m_PlayerInput.FindAction("RAtk", throwIfNotFound: true);
+        m_PlayerInput_Defen = m_PlayerInput.FindAction("Defen", throwIfNotFound: true);
+        m_PlayerInput_Roll = m_PlayerInput.FindAction("Roll", throwIfNotFound: true);
+        m_PlayerInput_Crouch = m_PlayerInput.FindAction("Crouch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,12 +375,24 @@ public partial class @InputController : IInputActionCollection2, IDisposable
     private IPlayerInputActions m_PlayerInputActionsCallbackInterface;
     private readonly InputAction m_PlayerInput_Movement;
     private readonly InputAction m_PlayerInput_Run;
+    private readonly InputAction m_PlayerInput_CameraLook;
+    private readonly InputAction m_PlayerInput_LAtk;
+    private readonly InputAction m_PlayerInput_RAtk;
+    private readonly InputAction m_PlayerInput_Defen;
+    private readonly InputAction m_PlayerInput_Roll;
+    private readonly InputAction m_PlayerInput_Crouch;
     public struct PlayerInputActions
     {
         private @InputController m_Wrapper;
         public PlayerInputActions(@InputController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerInput_Movement;
         public InputAction @Run => m_Wrapper.m_PlayerInput_Run;
+        public InputAction @CameraLook => m_Wrapper.m_PlayerInput_CameraLook;
+        public InputAction @LAtk => m_Wrapper.m_PlayerInput_LAtk;
+        public InputAction @RAtk => m_Wrapper.m_PlayerInput_RAtk;
+        public InputAction @Defen => m_Wrapper.m_PlayerInput_Defen;
+        public InputAction @Roll => m_Wrapper.m_PlayerInput_Roll;
+        public InputAction @Crouch => m_Wrapper.m_PlayerInput_Crouch;
         public InputActionMap Get() { return m_Wrapper.m_PlayerInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -204,6 +408,24 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                 @Run.started -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnRun;
                 @Run.performed -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnRun;
                 @Run.canceled -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnRun;
+                @CameraLook.started -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnCameraLook;
+                @CameraLook.performed -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnCameraLook;
+                @CameraLook.canceled -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnCameraLook;
+                @LAtk.started -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnLAtk;
+                @LAtk.performed -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnLAtk;
+                @LAtk.canceled -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnLAtk;
+                @RAtk.started -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnRAtk;
+                @RAtk.performed -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnRAtk;
+                @RAtk.canceled -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnRAtk;
+                @Defen.started -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnDefen;
+                @Defen.performed -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnDefen;
+                @Defen.canceled -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnDefen;
+                @Roll.started -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnRoll;
+                @Roll.performed -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnRoll;
+                @Roll.canceled -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnRoll;
+                @Crouch.started -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnCrouch;
+                @Crouch.performed -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnCrouch;
+                @Crouch.canceled -= m_Wrapper.m_PlayerInputActionsCallbackInterface.OnCrouch;
             }
             m_Wrapper.m_PlayerInputActionsCallbackInterface = instance;
             if (instance != null)
@@ -214,6 +436,24 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
+                @CameraLook.started += instance.OnCameraLook;
+                @CameraLook.performed += instance.OnCameraLook;
+                @CameraLook.canceled += instance.OnCameraLook;
+                @LAtk.started += instance.OnLAtk;
+                @LAtk.performed += instance.OnLAtk;
+                @LAtk.canceled += instance.OnLAtk;
+                @RAtk.started += instance.OnRAtk;
+                @RAtk.performed += instance.OnRAtk;
+                @RAtk.canceled += instance.OnRAtk;
+                @Defen.started += instance.OnDefen;
+                @Defen.performed += instance.OnDefen;
+                @Defen.canceled += instance.OnDefen;
+                @Roll.started += instance.OnRoll;
+                @Roll.performed += instance.OnRoll;
+                @Roll.canceled += instance.OnRoll;
+                @Crouch.started += instance.OnCrouch;
+                @Crouch.performed += instance.OnCrouch;
+                @Crouch.canceled += instance.OnCrouch;
             }
         }
     }
@@ -222,5 +462,11 @@ public partial class @InputController : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnCameraLook(InputAction.CallbackContext context);
+        void OnLAtk(InputAction.CallbackContext context);
+        void OnRAtk(InputAction.CallbackContext context);
+        void OnDefen(InputAction.CallbackContext context);
+        void OnRoll(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
     }
 }
