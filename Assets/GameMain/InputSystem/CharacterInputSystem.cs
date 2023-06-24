@@ -50,4 +50,21 @@ public class CharacterInputSystem : MonoBehaviour
     {
         get => m_InputController.PlayerInput.Crouch.triggered;
     }
+
+    //内部函数
+    private void Awake()
+    {
+        if (m_InputController == null)
+            m_InputController = new InputController();
+    }
+
+    private void OnEnable()
+    {
+        m_InputController.Enable();
+    }
+
+    private void OnDisable()
+    {
+        m_InputController.Disable();
+    }
 }

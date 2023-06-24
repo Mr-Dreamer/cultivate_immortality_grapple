@@ -106,7 +106,7 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                     ""id"": ""0c06f255-e870-4064-b409-5e1f667d026a"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": true,
@@ -115,7 +115,7 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""3d6302c7-c68c-4d7b-a276-10a0fa3b691b"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -126,7 +126,7 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""fc5b5c3c-fded-4db7-9993-f273389954a5"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -137,7 +137,7 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""0e065bd5-fdb0-4b7e-9f86-4ef0797f9e55"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -148,7 +148,7 @@ public partial class @InputController : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""d900d9a1-7936-490c-b12b-78a1ecfe732a"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
