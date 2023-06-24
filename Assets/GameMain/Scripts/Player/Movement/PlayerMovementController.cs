@@ -22,7 +22,7 @@ namespace Grapple.Move
         [SerializeField] private Transform m_CrouchCameraLook;
 
         //Ref Value
-        private float m_TargetRotation;
+        private float m_TargetRotation;//移动时玩家的朝向
         private float m_RotationVelocity;//玩家当前角度（没多大作用，方法参数要求）
 
         //LerpTime
@@ -97,6 +97,10 @@ namespace Grapple.Move
             return m_IsOnGround && m_CharacterAnimator.CheckAnimationTag("Motion") || m_CharacterAnimator.CheckAnimationTag("CrouchMotion");
         }
 
+        /// <summary>
+        /// 是否可以下蹲
+        /// </summary>
+        /// <returns></returns>
         private bool CanCrouch()
         {
             if (m_CharacterAnimator.CheckAnimationTag("Crouch")) return false;
@@ -105,7 +109,10 @@ namespace Grapple.Move
             return true;
         }
 
-
+        /// <summary>
+        /// 是否可以奔跑
+        /// </summary>
+        /// <returns></returns>
         private bool CanRunControl()
         {
             if (Vector3.Dot(m_MovementDirection.normalized, transform.forward) < 0.75f) return false;
@@ -117,7 +124,9 @@ namespace Grapple.Move
 
         #endregion
 
-
+        /// <summary>
+        /// 计算玩家移动方向并移动
+        /// </summary>
         private void PlayerMoveDirection()
         {
 
@@ -147,7 +156,6 @@ namespace Grapple.Move
             {
                 m_MovementDirection = Vector3.zero;
             }
-
             m_CharacterController.Move((m_CharacterCurrentMoveSpeed * Time.deltaTime)
                 * m_MovementDirection.normalized + Time.deltaTime
                 * new Vector3(0.0f, m_VerticalSpeed, 0.0f));
@@ -164,11 +172,13 @@ namespace Grapple.Move
                 m_CharacterAnimator.SetFloat(m_MovementID, m_CharacterInputSystem.PlaerMovement.sqrMagnitude * ((m_CharacterInputSystem.PlayerRun && !m_IsOnCrouch) ? 2f : 1f), 0.1f, Time.deltaTime);
 
                 m_CharacterCurrentMoveSpeed = (m_CharacterInputSystem.PlayerRun && !m_IsOnCrouch) ? m_RunSpeed : m_WalkSpeed;
+
             }
             else
             {
                 m_CharacterAnimator.SetFloat(m_MovementID, 0f, 0.05f, Time.deltaTime);
                 m_CharacterCurrentMoveSpeed = 0f;
+
             }
 
             m_CharacterAnimator.SetFloat(m_RunID, (m_CharacterInputSystem.PlayerRun && !m_IsOnCrouch) ? 1f : 0f);

@@ -56,7 +56,8 @@ namespace Grapple.Move
 
         protected virtual void Update()
         {
-
+            CharacterGravity();
+            CheckOnGround();
         }
 
         /// <summary>
@@ -93,23 +94,24 @@ namespace Grapple.Move
         private void CheckOnGround()
         {
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - m_GroundDetectionOffset, transform.position.z);
-            m_IsOnGround = Physics.CheckSphere(spherePosition, m_GroundDetectionRang, m_WhatIsGround, QueryTriggerInteraction.Ignore);
+            //m_IsOnGround = Physics.CheckSphere(spherePosition, m_GroundDetectionRang, m_WhatIsGround, QueryTriggerInteraction.Ignore);
+            m_IsOnGround = true;
         }
 
         private void OnDrawGizmosSelected()
         {
 
-            if (m_IsOnGround)
-                Gizmos.color = Color.green;
-            else
-                Gizmos.color = Color.red;
+            //if (m_IsOnGround)
+            //    Gizmos.color = Color.green;
+            //else
+            //    Gizmos.color = Color.red;
 
-            Vector3 position = Vector3.zero;
+            //Vector3 position = Vector3.zero;
 
-            position.Set(transform.position.x, transform.position.y - m_GroundDetectionOffset,
-                transform.position.z);
+            //position.Set(transform.position.x, transform.position.y - m_GroundDetectionOffset,
+            //    transform.position.z);
 
-            Gizmos.DrawWireSphere(position, m_GroundDetectionRang);
+            //Gizmos.DrawWireSphere(position, m_GroundDetectionRang);
         }
 
         /// <summary>
@@ -128,6 +130,39 @@ namespace Grapple.Move
                 }
             }
             return dir;
+        }
+
+        protected bool CanAnimationMotion(Vector3 dir)
+        {
+            return Physics.Raycast(transform.position + transform.up * .5f, dir.normalized * m_CharacterAnimator.GetFloat(m_AnimationMoveID), out var hit, 1f, m_WhatIsObs);
+        }
+
+        /// <summary>
+        /// 移动接口
+        /// </summary>
+        /// <param name="moveDirection">移动方向</param>
+        /// <param name="moveSpeed">移动速度</param>
+        public virtual void CharacterMoveInterface(Vector3 moveDirection, float moveSpeed, bool useGravity)
+        {
+            if (!CanAnimationMotion(moveDirection))
+            {
+                m_MovementDirection = moveDirection.normalized;
+
+                m_MovementDirection = ResetMoveDirectionOnSlop(m_MovementDirection);
+
+                if (useGravity)
+                {
+                    m_VerticalDirection.Set(0.0f, m_VerticalSpeed, 0.0f);
+                }
+                else
+                {
+                    m_VerticalDirection = Vector3.zero;
+                }
+
+                m_CharacterController.Move((moveSpeed * Time.deltaTime)
+                    * m_MovementDirection.normalized + Time.deltaTime
+                    * m_VerticalDirection);
+            }
         }
     }
 }
