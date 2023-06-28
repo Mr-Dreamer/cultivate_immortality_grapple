@@ -2,7 +2,7 @@
 // 文件名称：PlayerCombatSystem.cs
 // 创 建 者：
 // 创建时间：2023/06/26
-// 功能描述：
+// 功能描述：玩家攻击类
 // ---------------------------------------------------------------
 using UnityEngine;
 using System.Collections;
@@ -29,6 +29,9 @@ namespace Grapple.Combat
             ActionMotion();
         }
 
+        /// <summary>
+        /// 获取玩家输入，是否播放攻击动画
+        /// </summary>
         private void PlayerAttackAction()
         {
             if (m_CharacterInputSystem.PlayerLAtk)
@@ -38,11 +41,9 @@ namespace Grapple.Combat
             }
         }
 
-
-
-
-
-
+        /// <summary>
+        /// 处理攻击时的位移
+        /// </summary>
         private void ActionMotion()
         {
             if (m_Animator.CheckAnimationTag("Attack"))
@@ -75,7 +76,7 @@ namespace Grapple.Combat
             int targetCount = Physics.OverlapSphereNonAlloc(m_DetectionCenter.position, m_DetectionRang, m_DetectionedTarget,
                 m_EnemyLayer);
 
-            //TODOßß后续功能补充
+            //TODO后续功能补充
         }
 
         #endregion
