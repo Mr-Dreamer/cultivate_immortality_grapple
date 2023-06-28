@@ -154,6 +154,7 @@ namespace Grapple.Move
             }
             else
             {
+                Debug.Log("#####zzw##zero");
                 m_MovementDirection = Vector3.zero;
             }
             m_CharacterController.Move((m_CharacterCurrentMoveSpeed * Time.deltaTime)
