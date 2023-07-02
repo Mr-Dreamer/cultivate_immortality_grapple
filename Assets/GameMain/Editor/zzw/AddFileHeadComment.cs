@@ -15,7 +15,7 @@ public class AddFileHeadComment : UnityEditor.AssetModificationProcessor
         if (!path.EndsWith(".cs")) return;
         string allText = "// ---------------------------------------------------------------\r\n"
                          + "// 文件名称：#SCRIPTFULLNAME#\r\n"
-                         + "// 创 建 者：\r\n"
+                         + "// 创 建 者：赵志伟\r\n"
                          + "// 创建时间：#CreateTime#\r\n"
                          + "// 功能描述：\r\n"
                          + "// ---------------------------------------------------------------\r\n";

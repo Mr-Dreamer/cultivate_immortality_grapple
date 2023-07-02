@@ -67,7 +67,19 @@ namespace Grapple.Combat
                     }
                 }
             }
-            //TODO音效
+            OnPlayerWeaponSound();
+        }
+
+        private void OnPlayerWeaponSound()
+        {
+            if (m_Animator.CheckAnimationTag("Attack"))
+            {
+                GameAssetsManager.Instance.PlaySound(m_AudioSource, SoundAssetsType.SwordWave);
+            }
+            if (m_Animator.CheckAnimationTag("GSAttack"))
+            {
+                GameAssetsManager.Instance.PlaySound(m_AudioSource, SoundAssetsType.GSwordWave);
+            }
         }
 
         private void OnDrawGizmos()
