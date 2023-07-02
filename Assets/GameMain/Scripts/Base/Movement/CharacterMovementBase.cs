@@ -41,6 +41,7 @@ namespace Grapple.Move
         protected int m_HorizontalID = Animator.StringToHash("Horizontal");
         protected int m_VerticalID = Animator.StringToHash("Vertical");
         protected int m_RunID = Animator.StringToHash("Run");
+        protected int m_Roll = Animator.StringToHash("Roll");
 
         protected virtual void Awake()
         {
@@ -138,7 +139,7 @@ namespace Grapple.Move
         }
 
         /// <summary>
-        /// 移动接口
+        /// 移动接口,处理了坡度和重力
         /// </summary>
         /// <param name="moveDirection">移动方向</param>
         /// <param name="moveSpeed">移动速度</param>

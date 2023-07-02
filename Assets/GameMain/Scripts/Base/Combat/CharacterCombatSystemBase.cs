@@ -23,10 +23,11 @@ namespace Grapple.Combat
         protected int m_LAtkID = Animator.StringToHash("LAtk");
         protected int m_RAtkID = Animator.StringToHash("RAtk");
         protected int m_DefenID = Animator.StringToHash("Defen");
-        protected int m_AnimationMoveID = Animator.StringToHash("AnimationMove");
+        protected int m_AnimationMoveID = Animator.StringToHash("AnimationMove"); 
+        protected int m_sWeapon = Animator.StringToHash("SWeapon"); 
 
-        //攻击检测
-        [SerializeField, Header("攻击检测")] protected Transform m_AttackDetectionCenter;
+         //攻击检测
+         [SerializeField, Header("攻击检测")] protected Transform m_AttackDetectionCenter;
         [SerializeField] protected float m_AttackDetectionRang;
         [SerializeField] protected LayerMask m_EnemyLayer;
 

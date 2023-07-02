@@ -34,7 +34,7 @@ public class CharacterInputSystem : MonoBehaviour
 
     public bool PlayerRAtk
     {
-        get => m_InputController.PlayerInput.RAtk.triggered;
+        get => m_InputController.PlayerInput.RAtk.phase == InputActionPhase.Performed;
     }
     public bool PlayerDefen
     {

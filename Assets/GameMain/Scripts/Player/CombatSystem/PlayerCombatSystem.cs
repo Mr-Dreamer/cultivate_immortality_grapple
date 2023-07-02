@@ -34,11 +34,24 @@ namespace Grapple.Combat
         /// </summary>
         private void PlayerAttackAction()
         {
-            if (m_CharacterInputSystem.PlayerLAtk)
+            if (m_CharacterInputSystem.PlayerRAtk)
             {
-                m_Animator.SetTrigger(m_LAtkID);
+                if (m_CharacterInputSystem.PlayerLAtk)
+                {
+                    m_Animator.SetTrigger(m_LAtkID);
 
+                }
             }
+            else
+            {
+                if (m_CharacterInputSystem.PlayerLAtk)
+                {
+                    m_Animator.SetTrigger(m_LAtkID);
+
+                }
+            }
+
+            m_Animator.SetBool(m_sWeapon, m_CharacterInputSystem.PlayerRAtk);
         }
 
         /// <summary>
@@ -46,7 +59,7 @@ namespace Grapple.Combat
         /// </summary>
         private void ActionMotion()
         {
-            if (m_Animator.CheckAnimationTag("Attack"))
+            if (m_Animator.CheckAnimationTag("Attack") || m_Animator.CheckAnimationTag("GSAttack"))
             {
                 m_CharacterMovementBase.CharacterMoveInterface(transform.forward, m_Animator.GetFloat(m_AnimationMoveID) * m_AttackMoveMult, true);
             }
@@ -60,7 +73,7 @@ namespace Grapple.Combat
         /// <returns></returns>
         private bool CanAttackLockOn()
         {
-            if (m_Animator.CheckAnimationTag("Attack"))
+            if (m_Animator.CheckAnimationTag("Attack") || m_Animator.CheckAnimationTag("GSAttack"))
             {
                 if (m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.75f)
                 {

@@ -1269,6 +1269,7 @@ MonoBehaviour:
   m_WalkSpeed: 1.5
   m_RunSpeed: 10
   m_CrouchMoveSpeed: 1.5
+  m_AnimationMoveSpeedMult: 0.5
   m_CrouchCenter: {x: 0, y: 0.45, z: 0}
   m_OriginCenter: {x: 0, y: 0.9, z: 0}
   m_CameraLookPositionOnCrouch: {x: 0, y: 0.7, z: 0}

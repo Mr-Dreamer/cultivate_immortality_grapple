@@ -35,6 +35,8 @@ namespace Grapple.Move
         [SerializeField, Header("移动速度")] private float m_RunSpeed;
         [SerializeField, Header("移动速度")] private float m_CrouchMoveSpeed;
 
+        [SerializeField, Header("动画移动速度倍率")] private float m_AnimationMoveSpeedMult;
+
 
         [SerializeField, Header("角色胶囊控制(下蹲)")] private Vector3 m_CrouchCenter;
         [SerializeField] private Vector3 m_OriginCenter;
@@ -83,7 +85,7 @@ namespace Grapple.Move
             UpdateMotionAnimation();
             UpdateCrouchAnimation();
             UpdateRollAnimation();
-
+            UpdateRollAnimation();
         }
 
         #endregion
@@ -194,9 +196,20 @@ namespace Grapple.Move
 
         }
 
+        /// <summary>
+        /// 更新翻滚动画
+        /// </summary>
         private void UpdateRollAnimation()
         {
+            if (m_CharacterInputSystem.PlayerRoll)
+            {
+                m_CharacterAnimator.SetTrigger(m_Roll);
+            }
 
+            if (m_CharacterAnimator.CheckAnimationTag("Roll"))
+            {
+                CharacterMoveInterface(transform.forward, m_CharacterAnimator.GetFloat(m_AnimationMoveID) * m_AnimationMoveSpeedMult, true);
+            }
         }
 
         private void CharacterCrouchControl()
