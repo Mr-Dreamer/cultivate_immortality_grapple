@@ -49,8 +49,6 @@ namespace Grapple.Combat
         /// <param name="hitName">传递受伤动画名</param>
         protected virtual void OnAnimationAttackEvent(string hitName)
         {
-            if (!m_Animator.CheckAnimationTag("Attack")) return;
-
             Collider[] attackDetectionTargets = new Collider[4];
 
             int counts = Physics.OverlapSphereNonAlloc(m_AttackDetectionCenter.position, m_AttackDetectionRang,
@@ -67,10 +65,10 @@ namespace Grapple.Combat
                     }
                 }
             }
-            OnPlayerWeaponSound();
+            PlayerWeaponSound();
         }
 
-        private void OnPlayerWeaponSound()
+        private void PlayerWeaponSound()
         {
             if (m_Animator.CheckAnimationTag("Attack"))
             {
