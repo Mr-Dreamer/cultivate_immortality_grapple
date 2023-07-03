@@ -191,6 +191,17 @@
                 },
                 {
                     "name": "",
+                    "id": "6ecfb318-a936-4ec3-927a-9d47622656b4",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LAtk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "89c325b8-99b5-4efb-9d7a-678e026dbc74",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
@@ -204,6 +215,17 @@
                     "name": "",
                     "id": "3ecaf4ab-e2a5-4ab3-b589-0441144f7b75",
                     "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RAtk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "46375689-0d4b-422b-9cb0-bc745c707a20",
+                    "path": "<Keyboard>/k",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
