@@ -603,7 +603,7 @@ ModelImporter:
       events:
       - time: 0.27753937
         functionName: OnAnimationAttackEvent
-        data: 
+        data: Hit_D_Left
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
