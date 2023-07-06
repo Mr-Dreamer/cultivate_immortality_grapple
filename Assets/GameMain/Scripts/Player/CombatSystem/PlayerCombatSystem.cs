@@ -11,6 +11,10 @@ namespace Grapple.Combat
 {
     public class PlayerCombatSystem : CharacterCombatSystemBase
     {
+        /// <summary>
+        /// 当前攻击目标
+        /// </summary>
+        [SerializeField] private Transform m_CurrentTarget; 
         //Speed
         [SerializeField, Header("攻击移动速度倍率"), Range(.1f, 10f)]
         private float m_AttackMoveMult;
@@ -19,7 +23,9 @@ namespace Grapple.Combat
         [SerializeField, Header("检测敌人")] private Transform m_DetectionCenter;
         [SerializeField] private float m_DetectionRang;
 
-        //缓存
+        /// <summary>
+        /// 缓存检测到的目标
+        /// </summary>
         private Collider[] m_DetectionedTarget = new Collider[1];
 
         private void Update()
@@ -27,6 +33,12 @@ namespace Grapple.Combat
             PlayerAttackAction();
             DetectionTarget();
             ActionMotion();
+            UpdateCurrentTarget();
+        }
+
+        private void LateUpdate()
+        {
+            OnAttackActionLockON();
         }
 
         /// <summary>
@@ -54,6 +66,17 @@ namespace Grapple.Combat
             m_Animator.SetBool(m_sWeapon, m_CharacterInputSystem.PlayerRAtk);
         }
 
+        private void OnAttackActionLockON()
+        {
+            if (CanAttackLockOn())
+            {
+                if (m_Animator.CheckAnimationTag("Attack") || m_Animator.CheckAnimationTag("GSAttack"))
+                {
+                    transform.root.rotation = transform.LockOnTarget(m_CurrentTarget.transform, transform.root.transform, 50f);
+                }
+            }
+        }
+
         /// <summary>
         /// 处理攻击时的位移
         /// </summary>
@@ -73,9 +96,13 @@ namespace Grapple.Combat
         /// <returns></returns>
         private bool CanAttackLockOn()
         {
+            if (m_CurrentTarget == null)
+            {
+                return false;
+            }
             if (m_Animator.CheckAnimationTag("Attack") || m_Animator.CheckAnimationTag("GSAttack"))
             {
-                if (m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.75f)
+                if (m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.75f) //攻击动画还未播放完毕
                 {
                     return true;
                 }
@@ -83,13 +110,36 @@ namespace Grapple.Combat
             return false;
         }
 
-
+        /// <summary>
+        /// 检测目标
+        /// </summary>
         private void DetectionTarget()
         {
             int targetCount = Physics.OverlapSphereNonAlloc(m_DetectionCenter.position, m_DetectionRang, m_DetectionedTarget,
                 m_EnemyLayer);
+            if (targetCount > 0)
+            {
+                SetCurrentTarget(m_DetectionedTarget[0].transform );
+            }
+        }
 
-            //TODO后续功能补充
+        private void SetCurrentTarget(Transform target)
+        {
+            if (m_CurrentTarget == null || m_CurrentTarget != target)
+            {
+                m_CurrentTarget = target;
+            }
+        }
+
+        private void UpdateCurrentTarget()
+        {
+            if (m_Animator.CheckAnimationTag("Motion"))
+            {
+                if (m_CharacterInputSystem.PlaerMovement.sqrMagnitude > 0)
+                {
+                    m_CurrentTarget = null;
+                }
+            }
         }
 
         #endregion

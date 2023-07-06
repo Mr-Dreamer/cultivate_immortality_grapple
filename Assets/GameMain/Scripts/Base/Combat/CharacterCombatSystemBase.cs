@@ -16,6 +16,7 @@ namespace Grapple.Combat
         protected Animator m_Animator;
         protected CharacterInputSystem m_CharacterInputSystem;
         protected CharacterMovementBase m_CharacterMovementBase;
+        [SerializeField]
         protected AudioSource m_AudioSource;
 
 
