@@ -1777,6 +1777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a78b801e747a472984c6ea7c9b63d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_AudioSource: {fileID: 0}
   m_AttackDetectionCenter: {fileID: 6591271580414616479}
   m_AttackDetectionRang: 1
   m_EnemyLayer:

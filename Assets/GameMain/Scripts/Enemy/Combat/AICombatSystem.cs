@@ -36,22 +36,39 @@ namespace Grapple
         /// </summary>
         private void AIView()
         {
-            int targetCount = Physics.OverlapSphereNonAlloc(m_DedectionCenter.position, m_AttackDetectionRang, m_ColliderTarget, m_WhatIsEnemy);
+            int targetCount = Physics.OverlapSphereNonAlloc(m_DedectionCenter.position, m_DetectionRang , m_ColliderTarget, m_WhatIsEnemy);
             if (targetCount > 0)
             {
-                if (!Physics.Raycast((transform.position + transform.root.up * 0.5f), (m_ColliderTarget[0].transform.position - transform.root.position).normalized, out var hit, m_WhatIsBos))
+                if (!Physics.Raycast((transform.root.position + transform.root.up * 0.5f), (m_ColliderTarget[0].transform.position - transform.root.position).normalized, out var hit, m_DetectionRang, m_WhatIsBos))
                 {
-                    if (Vector3.Dot((m_ColliderTarget[0].transform.position - transform.position).normalized, transform.root.forward) > 0.25f)
+                    if (Vector3.Dot((m_ColliderTarget[0].transform.position - transform.root.position).normalized, transform.root.forward) > 0.25f)
                     {
                         m_CurrentTarget = m_ColliderTarget[0].transform;
                     }
+                    else
+                    {
+                        Debug.Log("#####zzw##DOT");
+                    }
                 }
+                else
+                {
+                    Debug.Log("#####zzw##RAY" + m_ColliderTarget[0].transform.name);
+                }
+            }
+            else
+            {
+                Debug.Log("#####zzw##COUNT");
             }
         }
 
-        //private void OnDrawGizmos()
-        //{
-        //    Gizmos.DrawWireSphere(m_DedectionCenter.position, m_DetectionRang);
-        //}
+        public Transform GetCurrentTarget()
+        {
+            return m_CurrentTarget;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireSphere(m_DedectionCenter.position, m_DetectionRang);
+        }
     }
 }
