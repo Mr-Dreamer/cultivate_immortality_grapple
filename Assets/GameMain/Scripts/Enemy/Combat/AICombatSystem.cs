@@ -24,6 +24,8 @@ namespace Grapple
         [SerializeField, Header("当前目标")]
         private Transform m_CurrentTarget;
 
+        private int m_LockOn = Animator.StringToHash("LockOn");
+
         Collider[] m_ColliderTarget = new Collider[1];
 
         private void Update()
@@ -45,19 +47,19 @@ namespace Grapple
                     {
                         m_CurrentTarget = m_ColliderTarget[0].transform;
                     }
-                    else
-                    {
-                        Debug.Log("#####zzw##DOT");
-                    }
                 }
-                else
-                {
-                    Debug.Log("#####zzw##RAY" + m_ColliderTarget[0].transform.name);
-                }
+            }
+        }
+
+        private void LockOnTarget()
+        {
+            if (m_Animator.CheckAnimationTag("Motion") && m_CurrentTarget != null)
+            {
+                m_Animator.SetFloat(m_LockOn, 1);
             }
             else
             {
-                Debug.Log("#####zzw##COUNT");
+                m_Animator.SetFloat(m_LockOn, 0);  
             }
         }
 
@@ -65,6 +67,8 @@ namespace Grapple
         {
             return m_CurrentTarget;
         }
+
+        public float GetCurrentTargetDistance => Vector3.Distance(m_CurrentTarget.position, transform.root.position);
 
         private void OnDrawGizmos()
         {

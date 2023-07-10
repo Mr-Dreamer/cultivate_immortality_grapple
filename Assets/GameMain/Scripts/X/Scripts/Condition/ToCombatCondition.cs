@@ -10,7 +10,7 @@ using Grapple;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ToCombatCondition", menuName = "StateMachine/Condition/ToCombatCondition")]
-public class ToCombatCondition : ConditionSO
+ public class ToCombatCondition : ConditionSO
 {
     public override void Init(StateMachineSystem stateMachineSystem)
     {
