@@ -13,25 +13,30 @@ namespace Grapple
     [CreateAssetMenu(fileName = "AICombat", menuName = "StateMachine/State/AICombat ")]
     public class AICombat : StateActionSO
     {
-        public override void OnUpdate()
+        private int m_RandomHorizontal;
+
+        public override void OnEnter(StateMachineSystem stateMachineSystem)
         {
-            Debug.Log("#####zzw##combat");
         }
 
-        ///// <summary>
-        ///// 如果不能攻击就逃跑
-        ///// </summary>
-        //private void NoCombat()
-        //{
-        //    if (m_Animator.CheckAnimationTag("Motion"))
-        //    {
-        //        if (m_AICombatSystem.GetCurrentTargetDistance < 4.5f + 0.1f)
-        //        {
-        //            m_AIMovement.CharacterMoveInterface(-m_AIMovement.transform.forward, 1.5f, true);
-        //            //m_Animator.SetFloat(m)
-        //        }
-        //    }
-        //}
+        public override void OnUpdate()
+        {
+        }
+
+        public override void OnExit()
+        {
+        }
+
+        private void NoCombatMove()
+        {
+            if (m_Animator.CheckAnimationTag("Motion"))
+            {
+                if (m_AICombatSystem.GetCurrentTargetDistance < 2.5f + 0.1f)
+                {
+
+                }
+            }
+        }
     }
 
 }
