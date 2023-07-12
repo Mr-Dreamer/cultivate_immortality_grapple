@@ -71,6 +71,8 @@ namespace Grapple
 
         public float GetCurrentTargetDistance => Vector3.Distance(m_CurrentTarget.position, transform.root.position);
 
+        public Vector3 GetDirectionForTargt => m_CurrentTarget.position - transform.position;
+
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(m_DedectionCenter.position, m_DetectionRang);

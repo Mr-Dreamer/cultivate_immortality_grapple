@@ -1113,6 +1113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerGreatSword
       objectReference: {fileID: 0}
+    - target: {fileID: 4359708906620177455, guid: 0325078c10fb4409389e3fccf5036f4c, type: 3}
+      propertyPath: m_WhatIsObs.m_Bits
+      value: 72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0325078c10fb4409389e3fccf5036f4c, type: 3}
 --- !u!1001 &4561303929850872834

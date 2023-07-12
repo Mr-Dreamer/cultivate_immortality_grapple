@@ -21,6 +21,7 @@ namespace Grapple
 
         public override void OnUpdate()
         {
+            NoCombatMove();
         }
 
         public override void OnExit()
@@ -31,12 +32,39 @@ namespace Grapple
         {
             if (m_Animator.CheckAnimationTag("Motion"))
             {
-                if (m_AICombatSystem.GetCurrentTargetDistance < 2.5f + 0.1f)
+                if (m_AICombatSystem.GetCurrentTargetDistance < 2.5f + 0.1f)//AI远离玩家
                 {
+                    m_AIMovement.CharacterMoveInterface(m_AICombatSystem.GetDirectionForTargt, 1.4f, true);
+                    m_Animator.SetFloat(VerticalID, -1, 0.25f, Time.deltaTime);
+                    m_Animator.SetFloat(HorizontalID, 0, 0.25f, Time.deltaTime);
+                    m_RandomHorizontal = GetRandomHorizontal;
 
+                    if (m_AICombatSystem.GetCurrentTargetDistance < 1.5f + 0.5f)
+                    {
+                        //
+                    }
+                }
+                else if (m_AICombatSystem.GetCurrentTargetDistance > 2.5f + 0.1f && m_AICombatSystem.GetCurrentTargetDistance < 6.1f + 0.5f)//AI左右移动
+                {
+                    m_AIMovement.CharacterMoveInterface(m_AIMovement.transform.right * (m_RandomHorizontal == 0 ? 1 : m_RandomHorizontal), 1.4f, true);
+                    m_Animator.SetFloat(VerticalID, 0, 0.25f, Time.deltaTime);
+                    m_Animator.SetFloat(HorizontalID, m_RandomHorizontal == 0 ? 1 : m_RandomHorizontal, 0.25f, Time.deltaTime);
+                }
+                else if (m_AICombatSystem.GetCurrentTargetDistance > 6.1f + 0.5f)//AI朝玩家移动 
+                {
+                    m_AIMovement.CharacterMoveInterface(m_AIMovement.transform.forward, 1.4f, true);
+                    m_Animator.SetFloat(VerticalID, 1, 0.25f, Time.deltaTime);
+                    m_Animator.SetFloat(HorizontalID, 0, 0.25f, Time.deltaTime);
                 }
             }
+            else
+            {
+                m_Animator.SetFloat(VerticalID, 0);
+                m_Animator.SetFloat(HorizontalID, 0);
+                m_Animator.SetFloat(RunID, 0);
+            }
         }
-    }
 
+        private int GetRandomHorizontal => Random.Range(-1, 2);
+    }
 }

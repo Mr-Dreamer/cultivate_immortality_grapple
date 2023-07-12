@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Grapple;
+using Grapple.Move;
 
 public abstract class StateActionSO : ScriptableObject
 {
@@ -18,4 +19,10 @@ public abstract class StateActionSO : ScriptableObject
     public Animator m_Animator;
 
     public AICombatSystem m_AICombatSystem;
+
+    public AIMovement m_AIMovement;
+
+    public int VerticalID;
+    public int HorizontalID;
+    public int RunID;
 }
