@@ -4,28 +4,23 @@ using UnityEngine;
 
 public class StateMachineSystem : MonoBehaviour
 {
-    public NB_Transition transition;
-
-    public StateActionSO currentState;
-
+    public NB_Transition Transition;
+    public StateActionSO CurrentState;
 
     private void Awake()
     {
-        transition?.Init(this);
-        currentState?.OnEnter(this);
+        Transition?.InitTransition(this);
+        CurrentState?.OnEnter();
     }
-
 
     private void Update()
     {
         StateMachineTick();
     }
 
-    private void StateMachineTick() 
+    private void StateMachineTick()
     {
-        transition?.TryGetApplyCondition();
-        currentState?.OnUpdate();
-
-
+        Transition?.TryGetApplyCondition();
+        CurrentState?.OnUpdate();
     }
 }

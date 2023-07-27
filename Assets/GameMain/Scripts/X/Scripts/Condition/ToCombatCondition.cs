@@ -12,10 +12,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ToCombatCondition", menuName = "StateMachine/Condition/ToCombatCondition")]
  public class ToCombatCondition : ConditionSO
 {
-    public override void Init(StateMachineSystem stateMachineSystem)
-    {
-        m_AICombatSystem = stateMachineSystem.GetComponentInChildren<AICombatSystem>();
-    }
     public override bool ConditionSetUp()
     {
         return (m_AICombatSystem.GetCurrentTarget() == null ? false : true);

@@ -32,6 +32,7 @@ namespace Grapple
         private void Update()
         {
             AIView();
+            LockOnTarget();
         }
 
         /// <summary>
@@ -57,6 +58,7 @@ namespace Grapple
             if (m_Animator.CheckAnimationTag("Motion") && m_CurrentTarget != null)
             {
                 m_Animator.SetFloat(m_LockOn, 1);
+                transform.root.rotation = transform.LockOnTarget(m_CurrentTarget, transform.root, 50);
             }
             else
             {
@@ -69,9 +71,9 @@ namespace Grapple
             return m_CurrentTarget;
         }
 
-        public float GetCurrentTargetDistance => Vector3.Distance(m_CurrentTarget.position, transform.root.position);
+        public float GetCurrentTargetDistance() => Vector3.Distance(m_CurrentTarget.position, transform.root.position);
 
-        public Vector3 GetDirectionForTargt => m_CurrentTarget.position - transform.position;
+        public Vector3 GetDirectionForTargt() => m_CurrentTarget.position - transform.position;
 
         private void OnDrawGizmos()
         {

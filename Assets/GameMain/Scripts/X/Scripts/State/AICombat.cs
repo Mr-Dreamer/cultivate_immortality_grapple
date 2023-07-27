@@ -6,6 +6,7 @@
 // ---------------------------------------------------------------
 using System.Collections;
 using System.Collections.Generic;
+using Grapple.Move;
 using UnityEngine;
 
 namespace Grapple
@@ -15,7 +16,7 @@ namespace Grapple
     {
         private int m_RandomHorizontal;
 
-        public override void OnEnter(StateMachineSystem stateMachineSystem)
+        public override void OnEnter()
         {
         }
 
@@ -32,36 +33,41 @@ namespace Grapple
         {
             if (m_Animator.CheckAnimationTag("Motion"))
             {
-                if (m_AICombatSystem.GetCurrentTargetDistance < 2.5f + 0.1f)//AI远离玩家
+                if (m_AICombatSystem.GetCurrentTarget() == null)
                 {
-                    m_AIMovement.CharacterMoveInterface(m_AICombatSystem.GetDirectionForTargt, 1.4f, true);
-                    m_Animator.SetFloat(VerticalID, -1, 0.25f, Time.deltaTime);
-                    m_Animator.SetFloat(HorizontalID, 0, 0.25f, Time.deltaTime);
+                    Debug.Log("#####zzw##target is null");
+                    return;
+                }
+                if (m_AICombatSystem.GetCurrentTargetDistance() < 2.5f + 0.1f)//AI远离玩家
+                {
+                    m_AIMovement.CharacterMoveInterface(-m_AICombatSystem.GetDirectionForTargt(), 1.4f, true);
+                    m_Animator.SetFloat(m_VerticalID, -1, 0.25f, Time.deltaTime);
+                    m_Animator.SetFloat(m_HorizontalID, 0, 0.25f, Time.deltaTime);
                     m_RandomHorizontal = GetRandomHorizontal;
 
-                    if (m_AICombatSystem.GetCurrentTargetDistance < 1.5f + 0.5f)
+                    if (m_AICombatSystem.GetCurrentTargetDistance() < 1.5f + 0.5f)
                     {
-                        //
+                        m_Animator.Play("Attack_0", 0, 0);
                     }
                 }
-                else if (m_AICombatSystem.GetCurrentTargetDistance > 2.5f + 0.1f && m_AICombatSystem.GetCurrentTargetDistance < 6.1f + 0.5f)//AI左右移动
+                else if (m_AICombatSystem.GetCurrentTargetDistance() > 2.5f + 0.1f && m_AICombatSystem.GetCurrentTargetDistance() < 6.1f + 0.5f)//AI左右移动
                 {
                     m_AIMovement.CharacterMoveInterface(m_AIMovement.transform.right * (m_RandomHorizontal == 0 ? 1 : m_RandomHorizontal), 1.4f, true);
-                    m_Animator.SetFloat(VerticalID, 0, 0.25f, Time.deltaTime);
-                    m_Animator.SetFloat(HorizontalID, m_RandomHorizontal == 0 ? 1 : m_RandomHorizontal, 0.25f, Time.deltaTime);
+                    m_Animator.SetFloat(m_VerticalID, 0, 0.25f, Time.deltaTime);
+                    m_Animator.SetFloat(m_HorizontalID, m_RandomHorizontal == 0 ? 1 : m_RandomHorizontal, 0.25f, Time.deltaTime);
                 }
-                else if (m_AICombatSystem.GetCurrentTargetDistance > 6.1f + 0.5f)//AI朝玩家移动 
+                else if (m_AICombatSystem.GetCurrentTargetDistance() > 6.1f + 0.5f)//AI朝玩家移动 
                 {
                     m_AIMovement.CharacterMoveInterface(m_AIMovement.transform.forward, 1.4f, true);
-                    m_Animator.SetFloat(VerticalID, 1, 0.25f, Time.deltaTime);
-                    m_Animator.SetFloat(HorizontalID, 0, 0.25f, Time.deltaTime);
+                    m_Animator.SetFloat(m_VerticalID, 1, 0.25f, Time.deltaTime);
+                    m_Animator.SetFloat(m_HorizontalID, 0, 0.25f, Time.deltaTime);
                 }
             }
             else
             {
-                m_Animator.SetFloat(VerticalID, 0);
-                m_Animator.SetFloat(HorizontalID, 0);
-                m_Animator.SetFloat(RunID, 0);
+                m_Animator.SetFloat(m_VerticalID, 0);
+                m_Animator.SetFloat(m_HorizontalID, 0);
+                m_Animator.SetFloat(m_RunID, 0);
             }
         }
 

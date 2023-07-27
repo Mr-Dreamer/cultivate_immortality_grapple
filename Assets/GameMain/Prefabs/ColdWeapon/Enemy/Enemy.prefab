@@ -199,8 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7449bbea67fab479bbe62fdd8e0717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transition: {fileID: 11400000, guid: ade51b0e825c54f809e5ba71f3187aae, type: 2}
-  currentState: {fileID: 11400000, guid: 964f5228151634d33a8d72fd4373f85b, type: 2}
+  Transition: {fileID: 11400000, guid: ade51b0e825c54f809e5ba71f3187aae, type: 2}
+  CurrentState: {fileID: 11400000, guid: 964f5228151634d33a8d72fd4373f85b, type: 2}
 --- !u!1 &96951888670177864
 GameObject:
   m_ObjectHideFlags: 0

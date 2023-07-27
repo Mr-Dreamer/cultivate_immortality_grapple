@@ -12,6 +12,16 @@ public class NB_Transition : ScriptableObject
         public StateActionSO fromState;
         public StateActionSO toState;
         public List<ConditionSO> conditions;
+
+        public void Init(StateMachineSystem stateMachineSystem)
+        {
+            fromState.InitState(stateMachineSystem);
+            toState.InitState(stateMachineSystem);
+            foreach (var item in conditions)
+            {
+                item.InitCondition(stateMachineSystem);
+            }
+        }
     }
     
     
@@ -19,22 +29,19 @@ public class NB_Transition : ScriptableObject
     [SerializeField] private List<StateAcitionConfig> configStateData = new List<StateAcitionConfig>();
     private StateMachineSystem stateMachineSystem;
 
-
-    public void Init(StateMachineSystem stateMachineSystem)
+    public void InitTransition(StateMachineSystem stateMachineSystem)
     {
         this.stateMachineSystem = stateMachineSystem;
         SaveAllStateTransitionInfo();
     }
-    
+
 
     private void SaveAllStateTransitionInfo()
     {
         foreach (var item in configStateData)
         {
-            foreach (var conditions in item.conditions)
-            {
-                conditions.Init(this.stateMachineSystem);
-            }
+            item.Init(stateMachineSystem);
+
             if (!states.ContainsKey(item.fromState))
             {
                 states.Add(item.fromState, new List<StateAcitionConfig>());
@@ -47,16 +54,16 @@ public class NB_Transition : ScriptableObject
         }
     }
 
-    public void TryGetApplyCondition() 
+    public void TryGetApplyCondition()
     {
         int conditionPriority = 0;
         int statePriority = 0;
         List<StateActionSO> toStates = new List<StateActionSO>();
         StateActionSO toState = null;
 
-        if (states.ContainsKey(stateMachineSystem.currentState)) 
+        if (states.ContainsKey(stateMachineSystem.CurrentState))
         {
-            foreach (var stateItem in states[stateMachineSystem.currentState])
+            foreach (var stateItem in states[stateMachineSystem.CurrentState])
             {
                 foreach (var conditionItem in stateItem.conditions)
                 {
@@ -71,12 +78,12 @@ public class NB_Transition : ScriptableObject
                 }
             }
         }
-        else 
+        else
         {
             return;
         }
 
-        if(toStates.Count!=0 || toStates != null) 
+        if (toStates.Count != 0 || toStates != null)
         {
             foreach (var item in toStates)
             {
@@ -88,18 +95,15 @@ public class NB_Transition : ScriptableObject
             }
         }
 
-        if (toState != null) 
+        if (toState != null)
         {
-            stateMachineSystem.currentState.OnExit();
-            stateMachineSystem.currentState = toState;
-            stateMachineSystem.currentState.OnEnter(this.stateMachineSystem);            
+            stateMachineSystem.CurrentState.OnExit();
+            stateMachineSystem.CurrentState = toState;
+            stateMachineSystem.CurrentState.OnEnter();
             toStates.Clear();
             conditionPriority = 0;
             statePriority = 0;
             toState = null;
         }
     }
-
-
-
 }
