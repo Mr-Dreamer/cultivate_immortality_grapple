@@ -12,6 +12,20 @@ namespace Grapple.Move
 {
     public class AIMovement : CharacterMovementBase
     {
+        protected override void Update()
+        {
+            base.Update();
 
+            UpdateGrvity();
+        }
+
+        /// <summary>
+        /// 更新怪物垂直方向上的移动
+        /// </summary>
+        private void UpdateGrvity()
+        {
+            m_VerticalDirection.Set(0f, m_VerticalSpeed, 0f);
+            m_CharacterController.Move(Time.deltaTime * m_VerticalDirection);
+        }
     }
 }

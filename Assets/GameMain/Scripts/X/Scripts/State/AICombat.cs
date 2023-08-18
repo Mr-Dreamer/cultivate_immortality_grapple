@@ -40,7 +40,7 @@ namespace Grapple
                 }
                 if (m_AICombatSystem.GetCurrentTargetDistance() < 2.5f + 0.1f)//AI远离玩家
                 {
-                    m_AIMovement.CharacterMoveInterface(-m_AICombatSystem.GetDirectionForTargt(), 1.4f, true);
+                    m_AIMovement.CharacterMoveInterface(-m_AICombatSystem.GetDirectionForTarget(), 1.4f, true);
                     m_Animator.SetFloat(m_VerticalID, -1, 0.25f, Time.deltaTime);
                     m_Animator.SetFloat(m_HorizontalID, 0, 0.25f, Time.deltaTime);
                     m_RandomHorizontal = GetRandomHorizontal;
