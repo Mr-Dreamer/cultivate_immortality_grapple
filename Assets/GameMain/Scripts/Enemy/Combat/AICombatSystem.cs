@@ -167,10 +167,8 @@ namespace Grapple
             {
                 m_Skills[i].InitSkill(m_Animator, this, m_CharacterMovementBase);
 
-                //�����ǰ���ܲ�����ʹ��
                 if (!m_Skills[i].GetSkillIsDone())
                 {
-                    //����
                     m_Skills[i].ResetSkill();
                 }
             }

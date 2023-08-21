@@ -44,8 +44,6 @@ public abstract class CombatSkillBase : ScriptableObject
         GameObjectPoolSystem.Instance.TakeGameObject("Timer").GetComponent<Timer>().CreateTime(m_SkillCDTime, () => m_SkillIsDone = true, false);
     }
 
-    #region �ӿ�
-
     public void InitSkill(Animator _animator, AICombatSystem _combat, CharacterMovementBase _movement)
     {
         this.m_Animator = _animator;
@@ -60,6 +58,4 @@ public abstract class CombatSkillBase : ScriptableObject
     public bool GetSkillIsDone() => m_SkillIsDone;
 
     public void SetSkillIsDone(bool done) => m_SkillIsDone = done;
-
-    #endregion
 }
