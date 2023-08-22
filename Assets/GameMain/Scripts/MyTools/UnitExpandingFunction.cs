@@ -33,6 +33,30 @@ public static class UnitExpandingFunction
         return animator.GetCurrentAnimatorStateInfo(animationIndex).IsName(animationName);
     }
 
+    public static bool CheckCurrentTagAnimationTimeIsLess(this Animator animator, string tagName, float time)
+    {
+        if (animator.CheckAnimationTag(tagName))
+        {
+            //如果当前动画状态的标准化时间小于传递的时间返回true 否则返回false
+            return (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < time) ? true : false;
+        }
+
+        //默认返回false
+        return false;
+    }
+
+    public static bool CheckCurrentTagAnimationTimeIsExceed(this Animator animator, string tagName, float time)
+    {
+        if (animator.CheckAnimationTag(tagName))
+        {
+            //如果当前动画状态的标准化时间大于传递的时间返回true 否则返回false
+            return (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > time) ? true : false;
+        }
+
+        //默认返回false
+        return false;
+    }
+
     /// <summary>
     /// 锁定目标方向
     /// </summary>

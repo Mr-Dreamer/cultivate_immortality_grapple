@@ -10,6 +10,7 @@ using UnityEngine;
 
 public enum SoundAssetsType
 {
+    Parry,
     Hit,
     SwordWave,
     GSwordWave

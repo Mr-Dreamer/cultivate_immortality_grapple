@@ -11,6 +11,8 @@ namespace Grapple.Combat
 {
     public class PlayerCombatSystem : CharacterCombatSystemBase
     {
+        private PlayerHealthSystem m_HealthSystem;
+
         /// <summary>
         /// 当前攻击目标
         /// </summary>
@@ -27,6 +29,9 @@ namespace Grapple.Combat
         /// 缓存检测到的目标
         /// </summary>
         private Collider[] m_DetectionedTarget = new Collider[1];
+
+        //允许攻击输入
+        [SerializeField] private bool allowAttackInput;
 
         private void Update()
         {
@@ -46,20 +51,44 @@ namespace Grapple.Combat
         /// </summary>
         private void PlayerAttackAction()
         {
-            if (m_CharacterInputSystem.PlayerRAtk)
+            //当玩家处于Motion状态(idle)也允许玩家输入攻击信号
+            if (!allowAttackInput)
             {
-                if (m_CharacterInputSystem.PlayerLAtk)
+                if (m_Animator.CheckCurrentTagAnimationTimeIsExceed("Motion", 0.01f) && !m_Animator.IsInTransition(0))
                 {
-                    m_Animator.SetTrigger(m_LAtkID);
-
+                    SetAllowAttackInput(true);
                 }
             }
-            else
+
+            //如果玩按下鼠标左键
+            if (m_CharacterInputSystem.PlayerLAtk && allowAttackInput)
             {
-                if (m_CharacterInputSystem.PlayerLAtk)
+                if (m_HealthSystem.GetCanExecute())
                 {
+                    //播放处决动画
+                    m_Animator.Play("Execute_0", 0, 0f);
+
+                    Time.timeScale = 1f;
+                }
+                else
+                {
+                    //触发默认攻击动画
                     m_Animator.SetTrigger(m_LAtkID);
 
+                    SetAllowAttackInput(false);
+                }
+            }
+
+            //如果玩家一直按住鼠标右键
+            if (m_CharacterInputSystem.PlayerRAtk)
+            {
+                //并且按下左键
+                if (m_CharacterInputSystem.PlayerLAtk)
+                {
+                    //触发大剑攻击动画
+                    m_Animator.SetTrigger(m_LAtkID);
+
+                    SetAllowAttackInput(false);
                 }
             }
 
@@ -143,5 +172,17 @@ namespace Grapple.Combat
         }
 
         #endregion
+
+        /// <summary>
+        /// 获取当前是否允许玩家攻击输入
+        /// </summary>
+        /// <returns></returns>
+        public bool GetAllowAttackInput() => allowAttackInput;
+
+        /// <summary>
+        /// 设置是否允许玩家输入攻击信号 
+        /// </summary>
+        /// <param name="allow"></param>
+        public void SetAllowAttackInput(bool allow) => allowAttackInput = allow;
     }
 }

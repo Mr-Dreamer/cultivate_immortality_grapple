@@ -87,4 +87,13 @@ public class CharacterHealthSystemBase : MonoBehaviour, IDamagar
     }
 
     #endregion
+
+    /// <summary>
+    /// 弹刀动画
+    /// </summary>
+    /// <param name="animationName"></param>
+    public void FlickWeapon(string animationName)
+    {
+        m_Animator.Play(animationName, 0, 0f);
+    }
 }
