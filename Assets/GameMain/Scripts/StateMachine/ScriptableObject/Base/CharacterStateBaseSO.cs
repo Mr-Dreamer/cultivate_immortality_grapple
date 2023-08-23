@@ -10,14 +10,14 @@ using UnityEngine;
 
 public abstract class CharacterStateBaseSO : ScriptableObject, IState
 {
-    protected Animator _animator;
-    protected List<CharacterStateActionBaseSO> _actions;
+    protected Animator m_Animator;
+    protected List<CharacterStateActionBaseSO> m_Actions;
 
 
     public void InitState(MainStateMachineController machineController)
     {
-        _animator = machineController.GetComponentInChildren<Animator>();
-        _actions = new List<CharacterStateActionBaseSO>();
+        m_Animator = machineController.GetComponentInChildren<Animator>();
+        m_Actions = new List<CharacterStateActionBaseSO>();
     }
 
     public virtual void OnEnterState()

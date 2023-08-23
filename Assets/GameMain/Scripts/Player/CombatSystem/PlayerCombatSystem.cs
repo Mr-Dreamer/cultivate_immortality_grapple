@@ -1,6 +1,6 @@
 // ---------------------------------------------------------------
 // 文件名称：PlayerCombatSystem.cs
-// 创 建 者：
+// 创 建 者：赵志伟
 // 创建时间：2023/06/26
 // 功能描述：玩家攻击类
 // ---------------------------------------------------------------
@@ -39,6 +39,7 @@ namespace Grapple.Combat
             DetectionTarget();
             ActionMotion();
             UpdateCurrentTarget();
+            PlayerParryInput();
         }
 
         private void LateUpdate()
@@ -93,6 +94,27 @@ namespace Grapple.Combat
             }
 
             m_Animator.SetBool(m_sWeapon, m_CharacterInputSystem.PlayerRAtk);
+        }
+
+        private void PlayerParryInput()
+        {
+            if (CanInputParry())
+            {
+                m_Animator.SetBool(m_DefenID, m_CharacterInputSystem.PlayerDefen);
+            }
+            else
+            {
+                m_Animator.SetBool(m_DefenID, false);
+            }
+        }
+
+        private bool CanInputParry()
+        {
+            if (m_Animator.CheckAnimationTag("Motion")) return true;
+            if (m_Animator.CheckAnimationTag("Parry")) return true;
+            if (m_Animator.CheckCurrentTagAnimationTimeIsExceed("Hit", 0.07f)) return true;
+
+            return false;
         }
 
         private void OnAttackActionLockON()
