@@ -14,56 +14,34 @@ public enum DetectionAttack
 
 public class ActivateAttackInput : StateMachineBehaviour
 {
-    [SerializeField] private DetectionAttack detectionAttack;
+    [SerializeField] private DetectionAttack m_DetectionAttack;
 
-    private PlayerCombatSystem combatSystem;
+    private PlayerCombatSystem m_CombatSystem;
 
-    [SerializeField] private float maxAllowAttackTime;
-    private float currentAllowAttackTime;
+    [SerializeField] private float m_MaxAllowAttackTime;
+    private float m_CurrentAllowAttackTime;
 
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //��ȡ��ҹ���ϵͳ�ű�
-        if (combatSystem == null) combatSystem = animator.GetComponent<PlayerCombatSystem>();
+        if (m_CombatSystem == null) m_CombatSystem = animator.GetComponent<PlayerCombatSystem>();
 
-        currentAllowAttackTime = maxAllowAttackTime;
+        m_CurrentAllowAttackTime = m_MaxAllowAttackTime;
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        //�����ǰ���������빥���ź��ټ�ʱ ��ʱ��ﵽ �������빥���ź�
-        if (!combatSystem.GetAllowAttackInput())
+        if (!m_CombatSystem.GetAllowAttackInput())
         {
-            if (currentAllowAttackTime > 0)
+            if (m_CurrentAllowAttackTime > 0)
             {
-                currentAllowAttackTime -= Time.deltaTime;
+                m_CurrentAllowAttackTime -= Time.deltaTime;
 
-                if (currentAllowAttackTime <= 0)
+                if (m_CurrentAllowAttackTime <= 0)
                 {
-                    combatSystem.SetAllowAttackInput(true);
+                    m_CombatSystem.SetAllowAttackInput(true);
                 }
             }
         }
     }
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
-    }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }

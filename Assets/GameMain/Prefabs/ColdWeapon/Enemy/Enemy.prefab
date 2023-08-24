@@ -217,6 +217,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HitmAnimationMoveMult: 1.1
+  m_MaxParryCount: 0
+  m_CounterattackParryCount: 0
+  m_MaxHitCount: 0
+  m_HitCount: 0
 --- !u!114 &1096142026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2871,7 +2875,9 @@ MonoBehaviour:
     m_Bits: 8
   m_CurrentTarget: {fileID: 0}
   m_AnimationMoveMult: 0
-  m_Skills: []
+  m_Skills:
+  - {fileID: 11400000, guid: b702bcbe1476947f4b9555c558ae51d1, type: 2}
+  - {fileID: 11400000, guid: f32aa79ead3b44adda565521b63cd530, type: 2}
 --- !u!1 &4389996627469959273
 GameObject:
   m_ObjectHideFlags: 0

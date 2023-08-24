@@ -41,6 +41,18 @@ public abstract class CombatSkillBase : ScriptableObject
 
     public void ResetSkill()
     {
+        if (GameObjectPoolSystem.Instance == null)
+        {
+            return;
+        }
+        if (GameObjectPoolSystem.Instance.TakeGameObject("Timer") == null)
+        {
+            return;
+        }
+        if (!GameObjectPoolSystem.Instance.TakeGameObject("Timer").TryGetComponent<Timer>(out Timer timer))
+        {
+            return;
+        }
         GameObjectPoolSystem.Instance.TakeGameObject("Timer").GetComponent<Timer>().CreateTime(m_SkillCDTime, () => m_SkillIsDone = true, false);
     }
 

@@ -1212,6 +1212,7 @@ GameObject:
   - component: {fileID: 4359708906620177441}
   - component: {fileID: 4359708906620177454}
   - component: {fileID: 4359708906620177455}
+  - component: {fileID: 1373684196}
   m_Layer: 7
   m_Name: PlayerGreatSword
   m_TagString: Untagged
@@ -1292,7 +1293,7 @@ MonoBehaviour:
     m_Bits: 8
   m_WhatIsObs:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 72
   m_IsOnGround: 0
   m_StandCameraLook: {fileID: 6069373461160985886}
   m_CrouchCameraLook: {fileID: 5489806998091414004}
@@ -1314,6 +1315,19 @@ MonoBehaviour:
   m_CrouchDetectionLayer:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &1373684196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4359708906620177452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 192720240cef34630930d8898ea94d5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HitmAnimationMoveMult: 0
 --- !u!1 &4359761127467066796
 GameObject:
   m_ObjectHideFlags: 0
@@ -1787,6 +1801,7 @@ MonoBehaviour:
   m_AttackMoveMult: 3
   m_DetectionCenter: {fileID: 7832737157889232441}
   m_DetectionRang: 1
+  allowAttackInput: 0
 --- !u!114 &7009594877303021169
 MonoBehaviour:
   m_ObjectHideFlags: 0

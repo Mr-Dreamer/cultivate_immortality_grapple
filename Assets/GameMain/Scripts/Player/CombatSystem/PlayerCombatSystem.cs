@@ -33,6 +33,12 @@ namespace Grapple.Combat
         //允许攻击输入
         [SerializeField] private bool allowAttackInput;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            m_HealthSystem = GetComponentInParent<PlayerHealthSystem>();
+        }
+
         private void Update()
         {
             PlayerAttackAction();

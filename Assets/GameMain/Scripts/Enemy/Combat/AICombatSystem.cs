@@ -34,10 +34,22 @@ namespace Grapple
 
         [SerializeField, Header("���ܴ���")] private List<CombatSkillBase> m_Skills = new List<CombatSkillBase>();
 
+        private void Start()
+        {
+            InitAllSkill();
+        }
+
         private void Update()
         {
             AIView();
             LockOnTarget();
+            UpdateAnimationMove();
+            DetectionTarget();
+        }
+
+        private void LateUpdate()
+        {
+            OnAnimatorActionAutoLockON();
         }
 
         /// <summary>
@@ -50,7 +62,7 @@ namespace Grapple
             {
                 if (!Physics.Raycast((transform.root.position + transform.root.up * 0.5f), (m_ColliderTarget[0].transform.position - transform.root.position).normalized, out var hit, m_DetectionRang, m_WhatIsBos))
                 {
-                    if (Vector3.Dot((m_ColliderTarget[0].transform.position - transform.root.position).normalized, transform.root.forward) > 0.25f)
+                    if (Vector3.Dot((m_ColliderTarget[0].transform.position - transform.root.position).normalized, transform.root.forward) > 0.35f)
                     {
                         m_CurrentTarget = m_ColliderTarget[0].transform;
                     }
