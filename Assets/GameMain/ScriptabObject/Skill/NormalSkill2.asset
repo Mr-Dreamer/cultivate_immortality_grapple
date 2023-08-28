@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NormalSkill2
   m_EditorClassIdentifier: 
   m_SkillName: SPAttack
-  m_SkillID: 0
-  m_SkillCDTime: 0
-  m_SkillUseDistance: 0
+  m_SkillID: 1
+  m_SkillCDTime: 10
+  m_SkillUseDistance: 5
   m_SkillIsDone: 0

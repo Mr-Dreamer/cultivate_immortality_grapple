@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2d532ab41434e42a33496f593c1036, type: 3}
   m_Name: NormalSkill
   m_EditorClassIdentifier: 
-  m_SkillName: 
+  m_SkillName: SPAttack
   m_SkillID: 0
-  m_SkillCDTime: 0
-  m_SkillUseDistance: 0
+  m_SkillCDTime: 10
+  m_SkillUseDistance: 5
   m_SkillIsDone: 0
