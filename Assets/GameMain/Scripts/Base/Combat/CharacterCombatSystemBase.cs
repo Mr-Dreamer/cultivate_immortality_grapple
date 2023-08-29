@@ -23,7 +23,7 @@ namespace Grapple.Combat
         //动画状态机中变量参数的哈希值
         protected int m_LAtkID = Animator.StringToHash("LAtk");
         protected int m_RAtkID = Animator.StringToHash("RAtk");
-        protected int m_DefenID = Animator.StringToHash("Defen");
+        protected int m_DefenID = Animator.StringToHash("Parry");
         protected int m_AnimationMoveID = Animator.StringToHash("AnimationMove"); 
         protected int m_sWeapon = Animator.StringToHash("SWeapon"); 
 
